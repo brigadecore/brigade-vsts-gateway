@@ -16,11 +16,13 @@ import (
 )
 
 var (
-	debug bool
+	debug     bool
+	namespace string
 )
 
 func init() {
 	flag.BoolVar(&debug, "debug", true, "enable verbose output")
+	flag.StringVar(&namespace, "namespace", "default", "Kubernetes namespace")
 
 	flag.Parse()
 	if debug {
@@ -33,7 +35,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("cannot get Kubernetes client: %v", err)
 	}
-	store := kube.New(client, "default")
+	store := kube.New(client, namespace)
 
 	router := setupRouter(store)
 	router.Run()
@@ -82,14 +84,14 @@ func vstsFn(c *gin.Context) {
 	}
 	log.Debugf("found project: %v", project)
 
-	if realToken := project.Secrets["eventGridToken"]; realToken != "" {
-		tok := c.Param("token")
-		if realToken != tok {
-			c.JSON(http.StatusForbidden, gin.H{"status": "Forbidden"})
-			log.Debugf("token does not match project's version: %v", err)
-			return
-		}
-	}
+	// if realToken := project.Secrets["vstsToken"]; realToken != "" {
+	// 	tok := c.Param("token")
+	// 	if realToken != tok {
+	// 		c.JSON(http.StatusForbidden, gin.H{"status": "Forbidden"})
+	// 		log.Debugf("token does not match project's version: %v", err)
+	// 		return
+	// 	}
+	// }
 
 	payload, err := json.Marshal(ev)
 	if err != nil {
