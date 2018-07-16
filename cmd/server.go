@@ -9,7 +9,7 @@ import (
 	"github.com/Azure/brigade/pkg/brigade"
 	"github.com/Azure/brigade/pkg/storage"
 	"github.com/Azure/brigade/pkg/storage/kube"
-	"github.com/radu-matei/vsts-brigade-gateway/pkg/webhook"
+	"github.com/radu-matei/vsts-brigade-gateway/pkg/vsts"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
