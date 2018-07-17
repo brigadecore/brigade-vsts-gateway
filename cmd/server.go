@@ -69,7 +69,7 @@ func vstsFn(c *gin.Context) {
 	s := c.MustGet("store").(storage.Store)
 	defer c.Request.Body.Close()
 
-	ev, err := webhook.NewFromRequestBody(c.Request.Body)
+	ev, err := vsts.NewFromRequestBody(c.Request.Body)
 	if err != nil {
 		log.Debugf("cannot get event from request: %v", err)
 	}
