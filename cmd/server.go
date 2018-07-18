@@ -84,14 +84,14 @@ func vstsFn(c *gin.Context) {
 	}
 	log.Debugf("found project: %v", project)
 
-	// if realToken := project.Secrets["vstsToken"]; realToken != "" {
-	// 	tok := c.Param("token")
-	// 	if realToken != tok {
-	// 		c.JSON(http.StatusForbidden, gin.H{"status": "Forbidden"})
-	// 		log.Debugf("token does not match project's version: %v", err)
-	// 		return
-	// 	}
-	// }
+	if realToken := project.Secrets["vstsToken"]; realToken != "" {
+		tok := c.Param("token")
+		if realToken != tok {
+			c.JSON(http.StatusForbidden, gin.H{"status": "Forbidden"})
+			log.Debugf("token does not match project's version: %v", err)
+			return
+		}
+	}
 
 	payload, err := json.Marshal(ev)
 	if err != nil {
