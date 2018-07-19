@@ -102,8 +102,8 @@ prestart: src/brigade.js written
 ## Building from source and running locally
 
 Prerequisites:
-- [the Go toolchain][8]
-- [`dep`][9]
+- [the Go toolchain][go]
+- [`dep`][dep]
 - `make` (optional)
 
 To build from source:
@@ -122,3 +122,5 @@ To build from source:
 
 [vsts-doc-key]: https://docs.microsoft.com/en-us/vsts/git/use-ssh-keys-to-authenticate?view=vsts#step-2--add-the-public-key-to-vststfs
 [vsts-webhooks]: https://docs.microsoft.com/en-us/vsts/service-hooks/services/webhooks
+[go]: https://golang.org/doc/install
+[dep]: https://github.com/golang/dep
