@@ -16,7 +16,7 @@ helm install -n brigade-vsts-gateway ./charts/brigade-vsts-gateway
 
 > If you want to create an ingress for this gateway, change `serviceType` to `ClusterIP`, set `ingress.enabled` to `true` and provide a host. Also make sure to check the ingress annotations in `ingress.yaml`.
 
-## Create SSH Key and use it in VSTS
+## Create an SSH key and use it in VSTS
 
 - create an SSH key (if you want to reuse an existing key you can skip this step):
 
@@ -46,7 +46,7 @@ sshKey: |-
 # The rest of your config...
 ```
 
-> Pay attention at formatting when pasting your SSH keyu in `values.yaml` - wrong formatting will result in failure to clone the repo!
+> Pay attention at formatting when pasting your SSH key in `values.yaml` - wrong formatting will result in failure to clone the repo!
 
 ## Create the webhook to the gateway
 
