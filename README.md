@@ -117,7 +117,7 @@ To build from source:
 - starting the binary will start listening on port 8080
 
 - at this point, your server should be able to start accepting incoming requests to `localhost:8080`
-- you can test the server locally, using [Postman][10] (POST requests with your desired JSON payload - see the `testdata` folders used for testing)
+- you can test the server locally, using Postman (POST requests with your desired JSON payload - see the `testdata` folders used for testing)
 - please note that running locally with a Kubernetes config file set is equivalent to running privileged inside the cluster, and any Brigade builds created will get executed!
 
 [vsts-doc-key]: https://docs.microsoft.com/en-us/vsts/git/use-ssh-keys-to-authenticate?view=vsts#step-2--add-the-public-key-to-vststfs
