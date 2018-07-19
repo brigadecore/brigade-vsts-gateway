@@ -72,7 +72,7 @@ const { events } = require('brigadier')
 events.on("git.push", (e, p) => {
   console.log(e)
 })
-``
+```
 
 Whenever code is pushed to this repository, the associated `brigade.js` file will be executed - in this case it only logs the received event to the console, but you can write any pipeline you need.
 
