@@ -25,6 +25,8 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command: ["/usr/bin/gateway"]
+          args: ["--namespace", {{.Values.namespace | quote}}]
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

@@ -1,15 +1,16 @@
 replicaCount: 1
+namespace: default
 
 rbac:
   enabled: true
 
 image:
   repository: radumatei/brigade-vsts-gateway
-  tag: v0.0.1
+  tag: edge
   pullPolicy: Always
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   internalPort: 8080
   externalPort: 80
 
@@ -17,7 +18,7 @@ service:
 # for Azure vsts you must have TLS ingress
 # more information here - https://docs.microsoft.com/en-us/azure/event-grid/security-authentication
 ingress:
-  enabled: true
+  enabled: false
 # by default, this chart uses TLS the annotations for kube-lego and nginx-ingress
 # if you have a different ingress controller, make sure to change them in ingress.yaml
 

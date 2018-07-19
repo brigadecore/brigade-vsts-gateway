@@ -19,7 +19,7 @@ linux:
 .PHONY: gateway-linux
 gateway-linux:
 	cd $(GATEWAY_CMD_PATH) && \
-	GOOS=linux go build -o ../$(OUTPUT_DIR)/$(GATEWAY_BINARY_NAME)
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ../$(OUTPUT_DIR)/$(GATEWAY_BINARY_NAME)
 
 .PHONY: docker-build
 docker-build: linux
