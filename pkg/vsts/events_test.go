@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"testing"
-
 	"github.com/stretchr/testify/assert"
 )
 
@@ -46,4 +45,8 @@ func TestNewFromRequest(t *testing.T) {
 
 	is.Equal("git.push", ev.EventType)
 	is.Equal("tfs", ev.PublisherID)
+
+	is.Equal("refs/heads/master", ev.Resource.RefUpdates[0].Name) // Branch Reference
+	is.Equal("33b55f7cb7e7e245323987634f960cf4a6e6bc74", ev.Resource.RefUpdates[0].NewObjectId) // Commit Id
+
 }
