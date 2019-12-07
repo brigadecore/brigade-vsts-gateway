@@ -130,14 +130,19 @@ This means the key is wrong, or passed incorrectly to the Brigade project.
 ## Building from source and running locally
 
 Prerequisites:
-- [the Go toolchain][go]
-- [`dep`][dep]
+- [Docker][docker]
 - `make` (optional)
 
-To build from source:
+To update vendored dependencies:
+- `make dep`
 
-- `dep ensure`
-- `make build` or `go build` to build the binary for your OS
+To verify vendored dependencies:
+- `make verify-vendored-code`
+
+To build from source:
+- `make build`
+
+Running locally:
 - if running locally, you should provide an environment variable for the Kubernetes configuration file:
   - on Linux (including Windows Subsystem for Linux) and macOS: `export KUBECONFIG=<path-to-config>`
   - on Windows: `$env:KUBECONFIG="<path-to-config>"` 
