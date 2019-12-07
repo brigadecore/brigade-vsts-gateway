@@ -119,5 +119,4 @@ func vstsFn(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, ev)
-	return
 }
