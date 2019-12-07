@@ -1,0 +1,49 @@
+{{ if .Values.gw.enabled }}
+{{ $fullname := include "brigade.gw.fullname" . }}
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ $fullname }}
+  labels:
+    app: {{ template "brigade.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+    role: gateway
+    type: github
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ template "brigade.fullname" . }}
+        role: gateway
+        type: github
+    spec:
+      serviceAccountName: {{ $fullname }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.gw.registry }}/{{ .Values.gw.name }}:{{ default .Chart.AppVersion .Values.gw.tag }}"
+        imagePullPolicy: {{ default "IfNotPresent" .Values.gw.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.internalPort }}
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.service.internalPort }}
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.service.internalPort }}
+        env:
+          - name: BRIGADE_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: BRIGADE_GATEWAY_PORT
+            value: {{ .Values.service.internalPort | quote }}
+          - name: BRIGADE_AUTHORS
+            value: {{ if .Values.gw.allowedAuthorRoles }}{{ join "," .Values.gw.allowedAuthorRoles | quote }}{{ end }}
+      {{ if .Values.privateRegistry }}imagePullSecrets:
+        - name: {{.Values.privateRegistry}}{{ end }}
+{{ end }}

@@ -1,0 +1,20 @@
+/bin/
+/brig/rootfs/brig
+/brigade-api/rootfs/brigade-api
+/brigade-controller/rootfs/brigade-controller
+/brigade-cr-gateway/rootfs/brigade-cr-gateway
+/brigade-github-gateway/rootfs/brigade-github-gateway
+/brigade-vacuum/rootfs/brigade-vacuum
+/brigade-worker/dist/
+/brigade-worker/doc/
+/tests/testdata/*-generated.*
+/vendor/
+node_modules/
+
+
+# IDEs
+.vscode/
+.idea/
+
+# Developer
+pvt/
