@@ -1,0 +1,23 @@
+{{ if .Values.gw.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "brigade.gw.fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+    role: gateway
+    type: github
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+  - port: {{ .Values.service.externalPort }}
+    targetPort: {{ .Values.service.internalPort }}
+    protocol: TCP
+    name: {{ .Values.service.name }}
+  selector:
+    app: {{ template "brigade.fullname" . }}
+    role: gateway
+    type: github
+{{ end }}

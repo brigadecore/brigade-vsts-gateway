@@ -104,8 +104,8 @@ func vstsFn(c *gin.Context) {
 		Provider:  "vsts",
 		Payload:   payload,
 		Revision: &brigade.Revision{
-			Ref:    "master",
-			Commit: "HEAD",
+			Ref:    ev.Resource.RefUpdates[0].Name, // it seems every payload only has a single refUpdate, so hardcoding zero is OK
+			Commit: ev.Resource.RefUpdates[0].NewObjectId,
 		},
 	}
 
@@ -119,5 +119,4 @@ func vstsFn(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, ev)
-	return
 }

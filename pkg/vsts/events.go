@@ -23,7 +23,18 @@ type Event struct {
 		Markdown string `json:"markdown"`
 	} `json:"detailedMessage"`
 
-	Resource        interface{} `json:"resource"`
+	// Resource        interface{} `json:"resource"`
+	Resource        struct {
+		Commits interface{} `json:"commits"`
+		RefUpdates []struct {
+			Name string `json:"name"`
+			OldObjectId string `json:"oldObjectId"`
+			NewObjectId string `json:"newObjectId"`
+		} `json:"refUpdates"`
+		Repository interface{} `json:"repository"`
+		DefaultBranch string `json:"defaultBranch"`
+		RemoteUrl string `json:"remoteUrl"`
+	} `json:"resource"`
 	ResourceVersion string      `json:"resourceVersion"`
 
 	ResourceContainers struct {
